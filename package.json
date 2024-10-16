@@ -1,0 +1,25 @@
+{
+  "name": "string_calculator_tdd_kata",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc --build",
+    "dev": "nodemon src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "@typescript-eslint/eslint-plugin": "^8.9.0",
+    "@typescript-eslint/parser": "^8.9.0",
+    "eslint": "^9.12.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "nodemon": "^3.1.7",
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
