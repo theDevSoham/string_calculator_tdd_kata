@@ -69,9 +69,17 @@ test("throw error 'negative numbers not allowed <negative_number>' on encounteri
 });
 
 // exception on multiple negative numbers
-test("throw error 'negative numbers not allowed <negative_number>' on encountering negative numbers", () => {
+test("throw error 'negative numbers not allowed <negative_number>' on encountering multiple negative numbers", () => {
     // wrapped in a function expression to detect throw using toThrow which uses catch block to test throw
     expect(() => add("//:\n1:-1:2:-2:3:-3")).toThrow(
         "negative numbers not allowed <-1,-2,-3>",
+    );
+});
+
+// exception on multiple same negative numbers should avoid repetition
+test("same negative numbers should not repeat in error message and should be sorted from asc to desc", () => {
+    // wrapped in a function expression to detect throw using toThrow which uses catch block to test throw
+    expect(() => add("//:\n1,2,-3,4,-6,7, -7,-3,5,2,-3")).toThrow(
+        "negative numbers not allowed <-7,-6,-3>",
     );
 });
