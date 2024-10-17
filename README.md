@@ -32,6 +32,9 @@ This repo is an assessment submission for `Technical Assessment` at `Incubyte` h
 2. `pnpm dev`: run dev server with `nodemon`
 3. `pnpm test`: runs all available test suites using `jest`
 
+### License
+This repo is copyright protected under MIT license.
+
 ### Contact me
 
 [Linkedin](https://linkedin.com/in/thedevsoham)
