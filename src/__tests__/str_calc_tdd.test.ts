@@ -49,3 +49,8 @@ test("large decimal addition: sum multiple decimal values should have correct fl
 test("\\n supported in string", () => {
     expect(add("1\n2,3")).toBe(1 + 2 + 3);
 });
+
+// support abrupt spaces
+test("'1,3, 5,4 ' that is space before 5 should be supported", () => {
+    expect(add("1,3, 5,4")).toBe(1 + 3 + 5 + 4);
+});
