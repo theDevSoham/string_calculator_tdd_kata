@@ -59,3 +59,10 @@ test("'1,3, 5,4 ' that is space before 5 should be supported", () => {
 test("custom delimiter: address custom delimiter using format //[delimiter]\\n[numbers…]", () => {
     expect(add("//;\n1;2")).toBe(1 + 2);
 });
+
+// exception on negative numbers
+test("throw error 'negative numbers not allowed <negative_number>' on encounteing ngative numbers", () => {
+    expect(add("//:\n1:2:4:5:-6:8")).toThrow(
+        "negative numbers not allowed <-6>",
+    );
+});
