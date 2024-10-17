@@ -38,5 +38,5 @@ test("large decimal addition: sum multiple decimal values should have correct fl
 
 // support new lines
 test("\\n supported in string", () => {
-    expect(add("1\n2,3")).toBe(5.12 + 6.1342 + 7.63);
+    expect(add("1\n2,3")).toBe(1 + 2 + 3);
 });
