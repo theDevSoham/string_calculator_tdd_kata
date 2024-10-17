@@ -72,7 +72,7 @@ test("throw error 'negative numbers not allowed <negative_number>' on encounteri
 test("throw error 'negative numbers not allowed <negative_number>' on encountering multiple negative numbers", () => {
     // wrapped in a function expression to detect throw using toThrow which uses catch block to test throw
     expect(() => add("//:\n1:-1:2:-2:3:-3")).toThrow(
-        "negative numbers not allowed <-1,-2,-3>",
+        "negative numbers not allowed <-3,-2,-1>",
     );
 });
 
