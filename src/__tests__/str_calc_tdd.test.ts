@@ -1,21 +1,21 @@
 import { add } from "..";
 
-// empty string test
+// 1. empty string test
 test("empty string to return 0", () => {
     expect(add("")).toBe(0);
 });
 
-// length 1 test
+// 2. length 1 test
 test("string with length 1 returns the number", () => {
     expect(add("1")).toBe(1);
 });
 
-// integer sum test
+// 3. integer sum test
 test("sum 1 + 5 returns 6", () => {
     expect(add("1,5")).toBe(6);
 });
 
-// long integers sum test
+// 4. long integers sum test
 test("sum large number of integers returns correct result", () => {
     const input = Array.from({ length: 1000 }, (_, i) => i + 1).join(","); // "1,2,3,...,1000"
     const expectedSum = (1000 * (1000 + 1)) / 2; // Sum of first 1000 natural numbers: n(n+1)/2
@@ -23,12 +23,12 @@ test("sum large number of integers returns correct result", () => {
     expect(add(input)).toBe(expectedSum);
 });
 
-// decimal sum test
+// 5. decimal sum test
 test("decimal addition: sum 5.12 + 6.1342 + 7.63 returns 18.8842", () => {
     expect(add("5.12, 6.1342, 7.63")).toBe(5.12 + 6.1342 + 7.63);
 });
 
-// double float decimal test
+// 6. double float decimal test
 test("large decimal addition: sum multiple decimal values should have correct floating-point precision", () => {
     const input = Array.from({ length: 1000 }, (_, i) => (i + 1) * 0.1).join(
         ",",
@@ -45,22 +45,22 @@ test("large decimal addition: sum multiple decimal values should have correct fl
     expect(add(input)).toBe(expectedSum);
 });
 
-// support new lines
+// 7. support new lines
 test("\\n supported in string", () => {
     expect(add("1\n2,3")).toBe(1 + 2 + 3);
 });
 
-// support abrupt spaces
+// 8. support abrupt spaces
 test("'1,3, 5,4 ' that is space before 5 should be supported", () => {
     expect(add("1,3, 5,4")).toBe(1 + 3 + 5 + 4);
 });
 
-// support custom delimiter
+// 9. support custom delimiter
 test("custom delimiter: address custom delimiter using format //[delimiter]\\n[numbers…]", () => {
     expect(add("//;\n1;2")).toBe(1 + 2);
 });
 
-// exception on negative numbers
+// 10. exception on negative numbers
 test("throw error 'negative numbers not allowed <negative_number>' on encountering negative numbers", () => {
     // wrapped in a function expression to detect throw using toThrow which uses catch block to test throw
     expect(() => add("//:\n1:2:4:5:-6:8")).toThrow(
@@ -68,7 +68,7 @@ test("throw error 'negative numbers not allowed <negative_number>' on encounteri
     );
 });
 
-// exception on multiple negative numbers
+// 11. exception on multiple negative numbers
 test("throw error 'negative numbers not allowed <negative_number>' on encountering multiple negative numbers", () => {
     // wrapped in a function expression to detect throw using toThrow which uses catch block to test throw
     expect(() => add("//:\n1:-1:2:-2:3:-3")).toThrow(
@@ -76,7 +76,7 @@ test("throw error 'negative numbers not allowed <negative_number>' on encounteri
     );
 });
 
-// exception should not contain repeated negative numbers and should be sorted in asc order
+// 12. exception should not contain repeated negative numbers and should be sorted in asc order
 test("error string should not contain repeated negative numbers and should be sorted in asc order", () => {
     // wrapped in a function expression to detect throw using toThrow which uses catch block to test throw
     expect(() => add("//:\n1:-2:3:4:-5:-6:7:8:-5:-9:-6")).toThrow(
