@@ -6,7 +6,8 @@ import Decimal from "decimal.js";
  * 2. Correction: numbers = "" i.e string length is 0
  * 3. Correction: numbers = "1" i.e string length is 1 should return the number
  * 4. Correction: numbers = "1,5" i.e return should be 6
- * 5. Correction: numbers = "0.1 + 0.1 + 0.1 + ... upto 1000" i.e very large amount of data should return 100
+ * 5. Correction: numbers = "0.1, 0.2, 0.3,... upto 1000" i.e very large amount of data should return 100
+ * 6. Correction: numbers = "1\n2,3" i.e detect new line delimiter
  */
 
 export function add(numbers: string): number {
@@ -18,7 +19,7 @@ export function add(numbers: string): number {
     else {
         // extract all numbers from string with split and create a numbers array
         const numArray = numbers
-            .split(",")
+            .split(/[\n, ]+/) // replace ',' with regular expression, split by ',', '\n' or ' '
             .map((str) => new Decimal(str.trim()));
 
         // iterate over the array to get the addition of all the numbers
