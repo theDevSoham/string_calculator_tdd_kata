@@ -61,8 +61,9 @@ test("custom delimiter: address custom delimiter using format //[delimiter]\\n[n
 });
 
 // exception on negative numbers
-test("throw error 'negative numbers not allowed <negative_number>' on encounteing ngative numbers", () => {
-    expect(add("//:\n1:2:4:5:-6:8")).toThrow(
+test("throw error 'negative numbers not allowed <negative_number>' on encountering negative numbers", () => {
+    // wrapped in a function expression to detect throw using toThrow which uses catch block to test throw
+    expect(() => add("//:\n1:2:4:5:-6:8")).toThrow(
         "negative numbers not allowed <-6>",
     );
 });

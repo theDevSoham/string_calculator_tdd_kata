@@ -46,7 +46,9 @@ export function add(numbers: string): number {
         // check for negative numbers and throw errors
         const negativeArr = numArray.filter((num) => num.lessThan(0));
         if (negativeArr.length > 0)
-            throw `negative numbers not allowed <${negativeArr.join(",")}>`;
+            throw new Error(
+                `negative numbers not allowed <${negativeArr.join(",")}>`,
+            );
 
         // iterate over the array to get the addition of all the numbers
         const result = numArray.reduce(
