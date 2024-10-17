@@ -9,6 +9,7 @@ import Decimal from "decimal.js";
  * 5. Correction: numbers = "0.1, 0.2, 0.3,... upto 1000" i.e very large amount of data should return 100
  * 6. Correction: numbers = "1\n2,3" i.e detect new line delimiter
  * 7. Correction: numbers = "//;\n1;2" i.e override ',' with ;
+ * 8. Correction: numbers = "//:\n1:2:4:5:-6:8" i.e negative number should throw error
  */
 
 export function add(numbers: string): number {
@@ -41,6 +42,11 @@ export function add(numbers: string): number {
             // added str length check as empty str cannot be handled by decimal.js
             .map((str) => new Decimal(str.length > 0 ? str.trim() : 0))
             .filter((num) => !num.isNaN());
+
+        // check for negative numbers and throw errors
+        const negativeArr = numArray.filter((num) => num.lessThan(0));
+        if (negativeArr.length > 0)
+            throw `negative numbers not allowed <${negativeArr.join(",")}>`;
 
         // iterate over the array to get the addition of all the numbers
         const result = numArray.reduce(
