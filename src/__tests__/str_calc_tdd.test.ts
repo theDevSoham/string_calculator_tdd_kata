@@ -30,8 +30,17 @@ test("decimal addition: sum 5.12 + 6.1342 + 7.63 returns 18.8842", () => {
 
 // double float decimal test
 test("large decimal addition: sum multiple decimal values should have correct floating-point precision", () => {
-    const input = Array(1000).fill("0.1").join(","); // 1000 numbers of 0.1
-    const expectedSum = 100.0; // 0.1 * 1000 should be exactly 100
+    const input = Array.from({ length: 1000 }, (_, i) => (i + 1) * 0.1).join(
+        ",",
+    ); // 0.1, 0.2, 0.3, ..., 100 (1000th term)
+
+    /**
+     *  Sum of first n terms of series is: (n/2) * (a1 + an)
+     *  a1 = first term = 0.1
+     *  an = last term = 0.1 * 1000 = 100
+     *  n = 1000
+     * */
+    const expectedSum = (1000 / 2) * (0.1 + 100);
 
     expect(add(input)).toBe(expectedSum);
 });
