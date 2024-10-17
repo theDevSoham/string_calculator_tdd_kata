@@ -1,1 +1,3 @@
-console.log("String calculator app is running...");
+export function add(numbers: string) {
+    return numbers;
+}
