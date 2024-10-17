@@ -75,3 +75,11 @@ test("throw error 'negative numbers not allowed <negative_number>' on encounteri
         "negative numbers not allowed <-1,-2,-3>",
     );
 });
+
+// exception should not contain repeated negative numbers and should be sorted in asc order
+test("error string should not contain repeated negative numbers and should be sorted in asc order", () => {
+    // wrapped in a function expression to detect throw using toThrow which uses catch block to test throw
+    expect(() => add("//:\n1:-2:3:4:-5:-6:7:8:-5:-9:-6")).toThrow(
+        "negative numbers not allowed <-9,-6,-5,-2>",
+    );
+});
