@@ -10,6 +10,7 @@ import Decimal from "decimal.js";
  * 6. Correction: numbers = "1\n2,3" i.e detect new line delimiter
  * 7. Correction: numbers = "//;\n1;2" i.e override ',' with ;
  * 8. Correction: numbers = "//:\n1:2:4:5:-6:8" i.e negative number should throw error
+ * 9. Correction: numbers = "//:\n1:-2:3:4:-5:-6:7:8:-5:-9:-6" i.e error shouldn't contain repeated numbers and should be sorted in asc.
  */
 
 export function add(numbers: string): number {
@@ -43,12 +44,18 @@ export function add(numbers: string): number {
             .map((str) => new Decimal(str.length > 0 ? str.trim() : 0))
             .filter((num) => !num.isNaN());
 
-        // check for negative numbers and throw errors
-        const negativeArr = numArray.filter((num) => num.lessThan(0));
-        if (negativeArr.length > 0)
+        // check for negative numbers, sort them, and throw errors
+        const negativeArr = numArray
+            .filter((num) => num.lessThan(0))
+            .map((num) => num.toNumber())
+            .sort((a, b) => a - b); // sorting in asc. order
+
+        if (negativeArr.length > 0) {
+            console.log([...new Set(negativeArr)], negativeArr);
             throw new Error(
-                `negative numbers not allowed <${negativeArr.join(",")}>`,
+                `negative numbers not allowed <${[...new Set(negativeArr)].join(",")}>`, // Set maks the values unique
             );
+        }
 
         // iterate over the array to get the addition of all the numbers
         const result = numArray.reduce(
